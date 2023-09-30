@@ -1,0 +1,22 @@
+{
+  "GVM_DEV": {
+    "username": "admin",
+    "password": "admin",
+    "socket_path": "/vaaas/gvmd.sock",
+    "vaaas_folder": "/vaaas",
+    "docker": "127.0.0.1",
+    "ssh_user": "gvm",
+    "ssh_pass": "gvm",
+    "ssh_port": 2222
+  },
+  "GVM_PROD": {
+    "username": "admin",
+    "password": "admin",
+    "socket_path": "/vaaas/gvmd.sock",
+    "vaaas_folder": "/vaaas",
+    "docker": "vaaas",
+    "ssh_user": "gvm",
+    "ssh_pass": "gvm",
+    "ssh_port": 22
+  }
+}

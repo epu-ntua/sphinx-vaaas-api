@@ -1,0 +1,6 @@
+{
+  "name": "test_scan",
+  "config_id": "daba56c8-73ec-11df-a475-002264764cea", //full and fast
+  "target_id": "4a4717fe-57d2-11e1-9a26-406186ea4fc5",
+  "scanner_id": "08b69003-5fc2-4037-a479-93b440211c73"  //OpenVas Defeult
+}

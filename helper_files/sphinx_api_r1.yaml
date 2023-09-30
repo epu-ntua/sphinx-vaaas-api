@@ -1,0 +1,557 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: SPHINX
+  contact:
+    name: Manos Kounelakis
+    email: mkounelakis@f-in.eu
+
+servers:
+  - url: http://localhost:0000
+    description: Localhost API server
+  
+paths:
+  /api/v1/mlid:
+    get:
+      tags: 
+      - MLID
+      summary: Retrieve a list of all mlids
+      parameters: 
+      - in: query
+        name: projection
+        schema:
+          type: string
+        description: A comma seperated string containing only the fields you want to retrieve
+        example: 'ex. duration,protocol_type'
+      - in: query
+        name: limit
+        schema:
+          type: number
+        description: Max number of results to return
+        example: 'ex.20'
+      - in: query
+        name: sortBy
+        schema:
+          type: string
+        description: Field to sort by results
+      - in: query
+        name: order
+        schema:
+          type: string
+        description: sortBy order (asc for ascending ,desc for descending)
+        example: 'ex. asc'
+      - in: query
+        name: offset
+        schema:
+          type: number
+        description: Offset for retrieving results(skips results).Can be used in conjuction with 'limit' field
+        example: 'ex.10'
+      - in: query
+        name: filter
+        schema:
+          type: string
+        description: comma separated filter conditions (must use the exact field names as the schema schema)
+        example: 'ex. duration:10,is_host_login:1'
+      responses:
+        '200':
+          description: All MLID data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                   $ref: '#/components/schemas/MLID'
+  
+  /api/v1/common:
+    get:
+      tags: 
+      - Common
+      parameters: 
+      - in: query
+        name: projection
+        schema:
+          type: string
+        description: A comma seperated string containing only the fields you want to retrieve
+        example: 'ex. source_ip,date'
+      - in: query
+        name: limit
+        schema:
+          type: number
+        description: Max number of results to return
+        example: 'ex. 20'
+      - in: query
+        name: sortBy
+        schema:
+          type: string
+        description: Field to sort by results
+      - in: query
+        name: order
+        schema:
+          type: string
+        description: sortBy order (asc for ascending ,desc for descending)
+        example: 'ex. asc'
+      - in: query
+        name: offset
+        schema:
+          type: number
+        description: Offset for retrieving results(skips results).Can be used in conjuction with 'limit' field
+        example: 'ex. 10'
+      - in: query
+        name: filter
+        schema:
+          type: string
+        description: comma separated filter conditions (must use the exact field names as the schema schema)
+        example: 'ex. source_port:443,_type:alert'
+      description: Retrieve common data
+      responses:
+        '200':
+          description: All Common data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                   $ref: '#/components/schemas/Common'
+  
+  /api/v1/ssh:
+    get:
+      tags: 
+      - SSH
+      parameters: 
+      - in: query
+        name: projection
+        schema:
+          type: string
+        description: A comma seperated string containing only the fields you want to retrieve
+        example: 'ex. type,ssh.sessionid'
+      - in: query
+        name: limit
+        schema:
+          type: number
+        description: Max number of results to return
+        example: 'ex. 20'
+      - in: query
+        name: sortBy
+        schema:
+          type: string
+        description: Field to sort by results
+      - in: query
+        name: order
+        schema:
+          type: string
+        description: sortBy order (asc for ascending ,desc for descending)
+        example: 'ex. asc'
+      - in: query
+        name: offset
+        schema:
+          type: number
+        description: Offset for retrieving results(skips results).Can be used in conjuction with 'limit' field
+        example: 'ex. 10'
+      - in: query
+        name: filter
+        schema:
+          type: string
+        description: comma separated filter conditions (must use the exact field names as the schema schema)
+        example: 'ex. type:password-authentication,ssh.username:root'
+      description: Retrieve ssh data
+      responses:
+        '200':
+          description: All ssh data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                   $ref: '#/components/schemas/SSH'
+  
+  /api/v1/http:
+    get:
+      tags: 
+      - HTTP
+      description: Retrieve http data
+      parameters: 
+      - in: query
+        name: projection
+        schema:
+          type: string
+        description: A comma seperated string containing only the fields you want to retrieve
+        example: 'ex. http.host,http.sessionid'
+      - in: query
+        name: limit
+        schema:
+          type: number
+        description: Max number of results to return
+        example: 'ex. 20'
+      - in: query
+        name: sortBy
+        schema:
+          type: string
+        description: Field to sort by results
+      - in: query
+        name: order
+        schema:
+          type: string
+        description: sortBy order (asc for ascending ,desc for descending)
+        example: 'ex. asc'
+      - in: query
+        name: offset
+        schema:
+          type: number
+        description: Offset for retrieving results(skips results).Can be used in conjuction with 'limit' field
+        example: 'ex. 10'
+      - in: query
+        name: filter
+        schema:
+          type: string
+        description: comma separated filter conditions (must use the exact field names as the schema schema)
+        example: 'ex. http.method:GET,http.proto:HTTP/1.1'
+      responses:
+        '200':
+          description: All Http data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                   $ref: '#/components/schemas/HTTP'
+  
+  /api/v1/ftp:
+    get:
+      tags: 
+      - FTP
+      description: Retrieve ftp data
+      parameters: 
+      - in: query
+        name: projection
+        schema:
+          type: string
+        description: A comma seperated string containing only the fields you want to retrieve
+        example: 'ex. ftp.command'
+      - in: query
+        name: limit
+        schema:
+          type: number
+        description: Max number of results to return
+        example: 'ex. 20'
+      - in: query
+        name: sortBy
+        schema:
+          type: string
+        description: Field to sort by results
+      - in: query
+        name: order
+        schema:
+          type: string
+        description: sortBy order (asc for ascending ,desc for descending)
+        example: 'ex. asc'
+      - in: query
+        name: offset
+        schema:
+          type: number
+        description: Offset for retrieving results(skips results).Can be used in conjuction with 'limit' field
+        example: 'ex. 10'
+      - in: query
+        name: filter
+        schema:
+          type: string
+        description: comma separated filter conditions (must use the exact field names as the schema schema)
+      responses:
+        '200':
+          description: All Http data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                   $ref: '#/components/schemas/FTP'
+  
+  /api/v1/smtp:
+    get:
+      tags: 
+      - SMTP
+      description: Retrieve smtp data
+      parameters: 
+      - in: query
+        name: projection
+        schema:
+          type: string
+        description: A comma seperated string containing only the fields you want to retrieve
+        example: 'ex. smtp.line'
+      - in: query
+        name: limit
+        schema:
+          type: number
+        description: Max number of results to return
+        example: 'ex. 20'
+      - in: query
+        name: sortBy
+        schema:
+          type: string
+        description: Field to sort by results
+      - in: query
+        name: order
+        schema:
+          type: string
+        description: sortBy order (asc for ascending ,desc for descending)
+        example: 'ex. asc'
+      - in: query
+        name: offset
+        schema:
+          type: number
+        description: Offset for retrieving results(skips results).Can be used in conjuction with 'limit' field
+        example: 'ex. 10'
+      - in: query
+        name: filter
+        schema:
+          type: string
+        description: comma separated filter conditions (must use the exact field names as the schema schema)
+      responses:
+        '200':
+          description: All smtp data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                   $ref: '#/components/schemas/SMTP'
+                   
+                
+          
+components:
+  schemas:
+    MLID:
+      title: MLID
+      type: object
+      properties:
+        duration:
+          type: number
+          description: length (number of seconds) of the connection
+        protocol_type:
+          type: string
+          description:  type of the protocol, e.g. tcp, udp, etc
+        service:
+          type: string
+          description: network service on the destination, e.g., http, telnet, etc.
+        flag:
+          type: string
+          description: normal or error status of the connection
+        source_bytes:
+          type: number
+          description: number of data bytes from source to destination
+        destination_bytes:
+          type: number
+          description: number of data bytes from destination to source
+        land:
+          type: number
+          description: 1 if connection is from/to the same host/port; 0 otherwise
+        wrong_fragment:
+          type: number
+          description: number of wrong fragments
+        urgent:
+          type: number
+          description: number of urgent packets
+        hot:
+          type: number
+          description: number of hot indicators
+        number_failed_logins:
+          type: number
+          description: number of failed login attempts
+        logged_in:
+          type: number
+          description: 1 if successfully logged in; 0 otherwise
+        num_compromised:
+          type: number
+          description: number of compromised conditions
+        root_shell:
+          type: number
+          description: 1 if root shell is obtained; 0 otherwise
+        su_attempted:
+          type: number
+          description: 1 if su root command attempted; 0 otherwise
+        num_root:
+          type: number
+          description: number of root accesses
+        num_file_creations:
+          type: number
+          description: number of file creation operations
+        num_shells:
+          type: number
+          description: number of shell prompts
+        num_access_files:
+          type: number
+          description: number of operations on access control files
+        num_outbound_cmds:
+          type: number
+          description: number of outbound commands in an ftp session
+        is_host_login:
+          type: number
+          description: 1 if the login belongs to the hot list; 0 otherwise
+        is_guest_login:
+          type: number
+          description: 1 if the login is a guest login; 0 otherwise
+        count:
+          type: number
+          description: number of connections to the same host as the current connection in the past two seconds
+        srv_count:
+          type: number
+          description: number of connections to the same service as the current connection in the past two seconds
+        serror_rate:
+          type: number
+          description: number of connections to the same host as the current connection in the past two seconds
+        srv_serror_rate:
+          type: number
+          description: '% of connections that have SYN errors'
+        rerror_rate:
+          type: number
+          description: '% of connections that have REJ errors'
+        srv_rerror_rate:
+          type: number
+          description: '% of connections that have REJ errors'
+        same_srv_rate:
+          type: number
+          description: '% of connections to same services'
+        diff_srv_rate:
+          type: number
+          description:  '% of connections to different services'
+        srv_diff_host_rate:
+          type: number
+          description: '% of connections to different hosts'
+        dst_host_count:
+          type: number
+          description: Number of connection to the same host to the destination host as the current connection in the past 2 seconds
+        dst_host_srv_count:
+          type: number
+          description: Number of connection from the same service to the destination host as the current connection in the past 2 seconds
+        dst_host_same_srv_rate:
+          type: number
+          description: '% of connections from the same services to the destination host'
+        dst_host_diff_srv_rate:
+          type: number
+          description: '% of connections from the different services to the destination host'
+        dst_host_same_src_port_rate:
+          type: number
+          description: '% of connections from the port services to the destination host'
+        dst_host_srv_diff_host_rate:
+          type: number
+          description: '% of connections from the different hosts from the same service to the destination host'
+        dst_host_serror_rate:
+          type: number
+          description: '% of connections that have SYN errors from thesame host to the destination host'
+        dst_host_srv_serror_rate:
+          type: number
+          description: '% of connections that have SYN errors from the same service to the destination host'
+        dst_host_rerror_rate:
+          type: number
+          description: '% of connections that have REJ errors from the same host to the destination host'
+        dst_host_srv_rerror_rate:
+          type: number
+          description: '% of connections that have REJ errors from the same service to the destination host'
+    Common:
+      type: object
+      properties:
+        token:
+          type: string
+          description: An Identification Number for the output message
+        date:
+          type: string
+          description: The full date of the incident
+          example: January 8th 2020, 13:13:55.255
+        destination_ip:
+          type: string
+          description: The IP of the destination of the packet (the Server’s IP)
+        destination_port:
+          type: number
+          description: The PORT of the destination of the packet (the Server’s PORT)
+        source_ip:
+          type: string
+          description: The IP of the source packet (the attack IP)
+        source_port:
+          type: number
+          description: The PORT of the source packet (the attack PORT)
+        _id:
+          type: string
+          description: An Identification Number for the attack
+        _type:
+          type: string
+          description: The type of the output [event, alert, logging]
+          example: alert
+        _index:
+          type: string
+          description: Where the output has been saved (only in the case of outputting in ElasticStack
+        _score:
+          type: number
+          description: The CVSS score of an attack (usually empty, only if it has been configured it can show a value)
+    SSH:
+      type: object
+      properties:
+        ssh.password:
+          type: string
+          description: The password used in the attack
+          example: 123456
+        ssh.sessionid:
+          type: string
+          description: The session id created by the ssh honeypot
+        ssh.username:
+          type: string
+          description: The username used in the attack
+          example: root
+        type:
+          type: string
+          description: The method of authentication used [password-authentication, ssh-certificate]
+          example: password-authentication
+    HTTP:
+      type: object
+      properties:
+        http.header:
+          type: string
+          description: All the lines used in the HTTP header of the HTTP Request 
+          example: 'http.header.accept:image/webp,image/apng,image/*,*/*;q=0.8 http.header.accept-encoding:gzip, deflate, br http.header.accept-language:en-US,en;q=0.9,el-GR;q=0.8,el;q=0.7 
+http.header.connection:keep-alive http.header.referer:http://127.0.0.1:8080/ http.header.sec-fetch-mode:no-cors http.header.sec-fetch-site:same-origin http.header.user-agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36'
+        http.host:
+          type: string
+          description: The virtual Host, used by the Honeypot
+          example: 127.0.0.1:80
+        http.method:
+          type: string
+          description: The method used in the HTTP Request
+          example: GET
+        http.proto:
+          type: string
+          description: The protocol used in the HTTP Request 
+          example: HTTP/1.1
+        http.sessionid:
+          type: string
+          description: The session id created by the HTTP honeypot
+        http.url:
+          type: string
+          description: The url used in the HTTP Request
+        payload:
+          type: string
+          description: The total answer of the HTTP Response, made by the HTTP Honeypot
+    FTP:
+      type: object
+      properties:
+        ftp.command:
+          type: string
+          description: The command used in the FTP attack
+          example:  PASS admin
+        ftp.sessionid:
+          type: string
+          description: The session id created by the FTP honeypot
+    SMTP:
+      type: object
+      properties:
+        smtp.line:
+          type: string
+          description: The command used in the SMTP attack
+          example: AUTH PLAIN XXXXXXXX
+        
+          
+        
+        
+
+
+          
+
+        
+        
